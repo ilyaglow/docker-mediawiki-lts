@@ -59,21 +59,17 @@ fi
 TERM=dumb php -- "$MEDIAWIKI_DB_HOST" "$MEDIAWIKI_DB_USER" "$MEDIAWIKI_DB_PASSWORD" "$MEDIAWIKI_DB_NAME" <<'EOPHP'
 <?php
 // database might not exist, so let's try creating it (just to be safe)
-
 list($host, $port) = explode(':', $argv[1], 2);
 $mysql = new mysqli($host, $argv[2], $argv[3], '', (int)$port);
-
 if ($mysql->connect_error) {
 	file_put_contents('php://stderr', 'MySQL Connection Error: (' . $mysql->connect_errno . ') ' . $mysql->connect_error . "\n");
 	exit(1);
 }
-
 if (!$mysql->query('CREATE DATABASE IF NOT EXISTS `' . $mysql->real_escape_string($argv[4]) . '`')) {
 	file_put_contents('php://stderr', 'MySQL "CREATE DATABASE" Error: ' . $mysql->error . "\n");
 	$mysql->close();
 	exit(1);
 }
-
 $mysql->close();
 EOPHP
 

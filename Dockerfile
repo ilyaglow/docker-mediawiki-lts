@@ -1,8 +1,8 @@
 FROM php:5.6-apache
 MAINTAINER Synctree App Force <appforce+docker@synctree.com>
 
-ENV MEDIAWIKI_VERSION 1.24
-ENV MEDIAWIKI_FULL_VERSION 1.24.2
+ENV MEDIAWIKI_VERSION 1.27
+ENV MEDIAWIKI_FULL_VERSION 1.27.2
 
 RUN set -x; \
     apt-get update \
@@ -42,9 +42,11 @@ RUN MEDIAWIKI_DOWNLOAD_URL="https://releases.wikimedia.org/mediawiki/$MEDIAWIKI_
     && tar -xf mediawiki.tar.gz -C /usr/src/mediawiki --strip-components=1
 
 
-COPY apache/mediawiki.conf /etc/apache2/
+COPY mediawiki.conf /etc/apache2/
 RUN echo Include /etc/apache2/mediawiki.conf >> /etc/apache2/apache2.conf
 
 COPY docker-entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["apache2-foreground"]
