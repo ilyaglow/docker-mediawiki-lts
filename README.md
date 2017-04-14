@@ -14,6 +14,10 @@ others.
 
     docker run --name some-mediawiki --link some-mysql:mysql -d ilyaglow/mediawiki-lts
 
+Place `LocalSettings.php` to `/opt/mediawiki/config/` and extensions to `/opt/mediawiki/extensions/` to be able to modify your settings and add/remove extensions:
+
+    docker run --name some-mediawiki --link some-mysql:mysql -v /opt/mediawiki/config/LocalSettings.php:/var/www/html/LocalSettings.php -v /opt/mediawiki/extensions:/var/www/html/extensions -d ilyaglow/mediawiki-lts
+
 The following environment variables are also honored for configuring your
 MediaWiki instance:
 
