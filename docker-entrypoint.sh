@@ -84,7 +84,7 @@ fi
 
 # Wait for the DB to come up
 echo "Waiting for database to come up at $MEDIAWIKI_DB_HOST:$MEDIAWIKI_DB_PORT..."
-sleep 5
+sleep 10
 
 export MEDIAWIKI_DB_TYPE MEDIAWIKI_DB_HOST MEDIAWIKI_DB_USER MEDIAWIKI_DB_PASSWORD MEDIAWIKI_DB_NAME
 
@@ -133,7 +133,7 @@ if [ -d "$MEDIAWIKI_SHARED" ]; then
 
 	# If an extensions folder exists inside the shared directory, as long as
 	# /var/www/html/extensions is not already a symbolic link, then replace it
-	if [ -d "$MEDIAWIKI_SHARED/extensions" -a ! -h /var/www/html/extensions ]; then
+	if [ -d "$MEDIAWIKI_SHARED/extensions" ]; then
 		echo >&2 "Found 'extensions' folder in data volume, creating symbolic link."
 		rm -rf /var/www/html/extensions
 		ln -s "$MEDIAWIKI_SHARED/extensions" /var/www/html/extensions
@@ -141,7 +141,7 @@ if [ -d "$MEDIAWIKI_SHARED" ]; then
 
 	# If a skins folder exists inside the shared directory, as long as
 	# /var/www/html/skins is not already a symbolic link, then replace it
-	if [ -d "$MEDIAWIKI_SHARED/skins" -a ! -h /var/www/html/skins ]; then
+	if [ -d "$MEDIAWIKI_SHARED/skins" ]; then
 		echo >&2 "Found 'skins' folder in data volume, creating symbolic link."
 		rm -rf /var/www/html/skins
 		ln -s "$MEDIAWIKI_SHARED/skins" /var/www/html/skins
@@ -149,7 +149,7 @@ if [ -d "$MEDIAWIKI_SHARED" ]; then
 
 	# If a vendor folder exists inside the shared directory, as long as
 	# /var/www/html/vendor is not already a symbolic link, then replace it
-	if [ -d "$MEDIAWIKI_SHARED/vendor" -a ! -h /var/www/html/vendor ]; then
+	if [ -d "$MEDIAWIKI_SHARED/vendor" ]; then
 		echo >&2 "Found 'vendor' folder in data volume, creating symbolic link."
 		rm -rf /var/www/html/vendor
 		ln -s "$MEDIAWIKI_SHARED/vendor" /var/www/html/vendor
