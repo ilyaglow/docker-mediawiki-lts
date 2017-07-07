@@ -2,7 +2,7 @@ FROM php:5.6-apache
 MAINTAINER Synctree App Force <appforce+docker@synctree.com>
 
 ENV MEDIAWIKI_VERSION 1.27
-ENV MEDIAWIKI_FULL_VERSION 1.27.2
+ENV MEDIAWIKI_FULL_VERSION 1.27.3
 
 RUN set -x; \
     apt-get update \
